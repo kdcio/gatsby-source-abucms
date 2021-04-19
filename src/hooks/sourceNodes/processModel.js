@@ -1,8 +1,8 @@
-import addTextNode from "../../utils/addTextNode";
+import buildNode from "./buildNode";
 import abuFetch from "../../utils/fetch";
 
 const processModel = async ({ pluginOptions, model, args }) => {
-  const { actions, cache, createNodeId, createContentDigest, reporter } = args;
+  const { cache, reporter } = args;
   const { useCache = true } = pluginOptions;
   let items = [];
 
@@ -15,7 +15,6 @@ const processModel = async ({ pluginOptions, model, args }) => {
       lastModified && `since ${lastModified}`
     }`
   );
-  const { createNode } = actions;
 
   // Download data from a remote API.
   try {
@@ -31,7 +30,12 @@ const processModel = async ({ pluginOptions, model, args }) => {
 
   // Process data and create nodes.using a custom processDatum function
   items.forEach((item) =>
-    createNode(addTextNode({ item, model, createNodeId, createContentDigest }))
+    buildNode("item", {
+      ...args,
+      pluginOptions,
+      item,
+      model,
+    })
   );
 
   // set the last timestamp from the cache

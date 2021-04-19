@@ -12,7 +12,8 @@
   },
   "keywords": [
     "abucms",
-    "gatsby"
+    "gatsby",
+    "gatsby-plugin"
   ],
   "author": {
     "name": "Ian Dela Cruz",
