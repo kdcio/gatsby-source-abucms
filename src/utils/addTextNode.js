@@ -12,9 +12,7 @@ const addTextNode = ({ item, model, createNodeId, createContentDigest }) => {
     },
   };
 
-  const node = Object.assign({}, item, nodeMeta);
-  console.log(node);
-  return node;
+  return Object.assign({}, item, nodeMeta);
 };
 
 export default addTextNode;
