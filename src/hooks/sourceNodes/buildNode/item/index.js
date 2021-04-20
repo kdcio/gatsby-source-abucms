@@ -1,3 +1,5 @@
+import { pascalCase } from "../../../../utils/stringCase";
+
 const buildItem = ({ item, model, createNodeId, createContentDigest }) => {
   const nodeContent = JSON.stringify(item);
   const nodeMeta = {
@@ -5,7 +7,7 @@ const buildItem = ({ item, model, createNodeId, createContentDigest }) => {
     parent: null,
     children: [],
     internal: {
-      type: `abuCms${model}`,
+      type: `abuCms${pascalCase(model)}`,
       content: nodeContent,
       contentDigest: createContentDigest(item),
     },
