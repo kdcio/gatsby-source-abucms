@@ -1,8 +1,8 @@
-import buildNode from "./buildNode";
+import buildNode from "../../buildNode";
 import abuFetch from "../../utils/fetch";
 
 const processModel = async ({ pluginOptions, model, args }) => {
-  const { cache, reporter } = args;
+  const { actions, cache, reporter } = args;
   const { useCache = true } = pluginOptions;
   let items = [];
 
@@ -32,15 +32,17 @@ const processModel = async ({ pluginOptions, model, args }) => {
 
   if (items.length === 0) return 0;
 
+  const { createNode } = actions;
   // Process data and create nodes.using a custom processDatum function
-  items.forEach((item) =>
-    buildNode("item", {
+  items.forEach((item) => {
+    const node = buildNode("item", {
       ...args,
       pluginOptions,
       item,
       model,
-    })
-  );
+    });
+    createNode(node);
+  });
 
   // set the last timestamp from the cache
   useCache && (await cache.set(`lastModified-${model}`, items[0].modified));

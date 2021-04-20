@@ -1,7 +1,7 @@
 import { addTask, executeTasks } from "../../utils/asyncSeries";
 import processModel from "./processModel";
 
-const sourceNodes = async (args, pluginOptions) => {
+export const sourceNodes = async (args, pluginOptions) => {
   const { reporter } = args;
   reporter.info("[abucms] Starting data fetch from API");
   // console.log("pluginOptions", pluginOptions);
@@ -16,5 +16,3 @@ const sourceNodes = async (args, pluginOptions) => {
   await executeTasks();
   reporter.info("[abucms] Done data fetch");
 };
-
-export default sourceNodes;

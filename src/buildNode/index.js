@@ -10,12 +10,7 @@ const buildNode = (type, context) => {
     return;
   }
 
-  const result = BUILDERS[type](context);
-  const nodesToCreate = Array.isArray(result) ? result : [result];
-
-  nodesToCreate.map((node) => {
-    context.actions.createNode(node);
-  });
+  return BUILDERS[type](context);
 };
 
 export default buildNode;
