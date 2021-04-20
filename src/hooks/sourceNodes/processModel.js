@@ -19,11 +19,11 @@ const processModel = async ({ pluginOptions, model, args }) => {
   // Download data from a remote API.
   try {
     const endPoint = `content/${model}`;
-    const { Items: items } = await abuFetch({
+    ({ Items: items } = await abuFetch({
       ...pluginOptions,
       endPoint,
       lastModified,
-    });
+    }));
     reporter.info(`[abucms] ${model}: ${items.length} document(s) fetched`);
   } catch (error) {
     reporter.error(`Error fetching files for ${model}.`, error);

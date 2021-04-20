@@ -11,7 +11,6 @@ const abuFetch = async ({
   const urlPath = path.join(apiBase, endPoint);
   const url = new URL(urlPath, baseUrl);
   url.searchParams.append("all", true);
-  url.searchParams.append("fields", true);
   url.searchParams.append(
     "lastModified",
     lastModified || new Date(0).toISOString()
@@ -23,12 +22,10 @@ const abuFetch = async ({
     },
   });
 
-  if (res.ok) {
-    const json = await res.json();
-    return json;
-  }
+  const json = await res.json();
+  if (res.ok) return json;
 
-  return { Items: [], fields: [] };
+  throw new Error(json.message);
 };
 
 export default abuFetch;
