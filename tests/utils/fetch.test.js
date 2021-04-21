@@ -1,6 +1,6 @@
 import abuFetch from "../../src/utils/fetch";
 
-describe("Fetch from AbuCMS API", () => {
+describe.skip("Fetch from AbuCMS API", () => {
   it.each([
     {
       baseUrl: "http://api.abucms.com",
