@@ -47,6 +47,9 @@
     "node-fetch": "^2.6.1"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "*.js": [
+      "eslint --cache --fix",
+      "pretty-quick --staged"
+    ]
   }
 }
