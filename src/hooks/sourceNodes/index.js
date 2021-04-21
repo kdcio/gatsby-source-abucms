@@ -13,6 +13,6 @@ export const sourceNodes = async (args, pluginOptions) => {
 
   // we hit the API one by one to avoid or at least minimize throttling
   // in DynamoDB specially if BillingMode set to PROVISIONED
-  await executeTasks();
-  reporter.info("[abucms] Done data fetch");
+  const total = await executeTasks();
+  reporter.info(`[abucms] Done: ${total} document(s) fetched`);
 };
