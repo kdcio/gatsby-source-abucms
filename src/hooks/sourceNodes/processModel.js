@@ -41,11 +41,11 @@ const processModel = async ({ pluginOptions, model, args }) => {
       item,
       model,
     });
-    createNode(node);
+    if (node) createNode(node);
   });
 
   // set the last timestamp from the cache
-  useCache && (await cache.set(`lastModified-${model}`, items[0].modified));
+  if (useCache) await cache.set(`lastModified-${model}`, items[0].modified);
 
   return items.length;
 };

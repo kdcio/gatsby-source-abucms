@@ -11,7 +11,8 @@ export const addTask = (func, params) => {
 
 export const executeTasks = () => {
   const task = tasks.shift();
-  return task(function () {
+  return task(() => {
     if (tasks.length > 0) return executeTasks();
+    return null;
   });
 };
