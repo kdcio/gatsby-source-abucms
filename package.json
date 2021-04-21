@@ -3,15 +3,24 @@
   "version": "0.1.0",
   "description": "GatsbyJS source plugin for AbuCMS",
   "main": "index.js",
+  "files": [
+    "gatsby-node.js",
+    "lib/*"
+  ],
   "scripts": {
-    "build": "babel src --out-dir lib",
+    "build": "npm run clean && npm run build:babel",
+    "build:babel": "babel src --out-dir lib",
     "build:watch": "babel src --out-dir lib --watch",
     "lint": "eslint src --ext .js --fix",
     "test": "jest --collect-coverage",
     "test:watch": "npm run test --watch",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "clean": "rm -fR lib"
   },
   "keywords": [
+    "headleass",
+    "serverless",
+    "cms",
     "abucms",
     "gatsby",
     "gatsby-plugin"
