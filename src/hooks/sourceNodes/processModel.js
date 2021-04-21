@@ -3,18 +3,17 @@ import abuFetch from "../../utils/fetch";
 
 const processModel = async ({ pluginOptions, model, args }) => {
   const { actions, cache, reporter } = args;
-  const { useCache = true } = pluginOptions;
+  const { useCache = true, debug = false } = pluginOptions;
   let items = [];
 
   // get the last timestamp from the cache
-  const lastModified = useCache
-    ? await cache.get(`lastModified-${model}`)
-    : new Date(0).toISOString();
-  reporter.info(
-    `[abucms] Fetching new ${model} data ${
-      lastModified && `since ${lastModified}`
-    }`
-  );
+  const lastModified =
+    (useCache && (await cache.get(`lastModified-${model}`))) ||
+    new Date(0).toISOString();
+
+  if (debug) {
+    reporter.info(`[abucms] Fetching new ${model} data since ${lastModified}`);
+  }
 
   // Download data from a remote API.
   try {
@@ -24,10 +23,13 @@ const processModel = async ({ pluginOptions, model, args }) => {
       endPoint,
       lastModified,
     }));
-    reporter.info(`[abucms] ${model}: ${items.length} document(s) fetched`);
   } catch (error) {
     reporter.error(`Error fetching files for ${model}.`, error);
     return 0;
+  }
+
+  if (debug) {
+    reporter.info(`[abucms] ${model}: ${items.length} document(s) fetched`);
   }
 
   if (items.length === 0) return 0;

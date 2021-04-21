@@ -3,10 +3,10 @@ import processModel from "./processModel";
 
 export const sourceNodes = async (args, pluginOptions) => {
   const { reporter } = args;
-  reporter.info("[abucms] Starting data fetch from API");
-  // console.log("pluginOptions", pluginOptions);
-
   const { models } = pluginOptions;
+
+  reporter.info("[abucms] Starting data fetch from API");
+
   models.forEach((model) => {
     addTask(processModel, { pluginOptions, model, args });
   });
@@ -14,5 +14,5 @@ export const sourceNodes = async (args, pluginOptions) => {
   // we hit the API one by one to avoid or at least minimize throttling
   // in DynamoDB specially if BillingMode set to PROVISIONED
   const total = await executeTasks();
-  reporter.info(`[abucms] Done: ${total} document(s) fetched`);
+  reporter.info(`[abucms] Done: ${total} new/updated document(s) fetched`);
 };
