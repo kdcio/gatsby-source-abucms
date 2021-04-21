@@ -1,7 +1,9 @@
 import buildItem from "./item";
+import buildHtml from "./html";
 
 const BUILDERS = {
   item: buildItem,
+  html: buildHtml,
 };
 
 const buildNode = (type, context) => {

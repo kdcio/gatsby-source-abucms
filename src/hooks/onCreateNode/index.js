@@ -1,9 +1,22 @@
+import buildNode from "../../buildNode";
+
 export const onCreateNode = (ctx) => {
-  const { node, reporter } = ctx;
+  const { actions, node, reporter } = ctx;
+  const { createNode } = actions;
 
   // Process only abuCms types
-  // console.log(node.internal.type);
   if (!node.internal.type.match(/^abuCms.*/g)) return;
-  // console.log("match", node);
+
   reporter.info("Match found", node);
+  const { parent, children, internal, ...item } = node;
+  Object.keys(item).forEach((key) => {
+    const fieldVal = item[key];
+    if (typeof fieldVal !== "object") return;
+
+    let newNode;
+    if (fieldVal?.type === "text/html") {
+      newNode = buildNode("html", { ...ctx, node, item: fieldVal, key });
+    }
+    if (newNode) createNode(newNode);
+  });
 };
