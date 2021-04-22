@@ -15,21 +15,28 @@ const processModel = async ({ pluginOptions, model, args }) => {
     reporter.info(`[abucms] Fetching new ${model} data since ${lastModified}`);
   }
 
+  if (useCache) {
+    items = (await cache.get(`abucms-${model}`)) || [];
+  }
+
   // Download data from a remote API.
+  let newItemsCount = 0;
   try {
     const endPoint = `content/${model}`;
-    ({ Items: items } = await abuFetch({
+    const { Items } = await abuFetch({
       ...pluginOptions,
       endPoint,
       lastModified,
-    }));
+    });
+    items = [...items, ...Items];
+    newItemsCount = Items.length;
   } catch (error) {
     reporter.error(`Error fetching files for ${model}.`, error);
     return 0;
   }
 
   if (debug) {
-    reporter.info(`[abucms] ${model}: ${items.length} document(s) fetched`);
+    reporter.info(`[abucms] ${model}: ${newItemsCount} document(s) fetched`);
   }
 
   if (items.length === 0) return 0;
@@ -47,9 +54,12 @@ const processModel = async ({ pluginOptions, model, args }) => {
   });
 
   // set the last timestamp from the cache
-  if (useCache) await cache.set(`lastModified-${model}`, items[0].modified);
+  if (useCache) {
+    await cache.set(`abucms-${model}`, items);
+    await cache.set(`lastModified-${model}`, items[0].modified);
+  }
 
-  return items.length;
+  return newItemsCount;
 };
 
 export default processModel;
