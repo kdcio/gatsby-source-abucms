@@ -6,28 +6,28 @@ const buildImage = async ({
   node,
   reporter,
   actions: { createNode },
-  store,
-  cache,
+  getCache,
   createNodeId,
 }) => {
-  let pictureNode;
-
   try {
-    ({ id: pictureNode } = await createRemoteFileNode({
+    const fileNode = await createRemoteFileNode({
       url: item.src,
       parentNodeId: node.id,
-      store,
-      cache,
+      getCache,
       createNode,
       createNodeId,
-    }));
-  } catch (err) {
-    reporter.warn(`[abucms] Error on ${item.src}. Skipping!`, err.message);
-  }
+    });
 
-  const linkKey = `${key}__NODE`;
-  /* eslint no-param-reassign: off */
-  node[linkKey] = pictureNode;
+    if (fileNode) {
+      const linkKey = `${key}__NODE`;
+      /* eslint no-param-reassign: off */
+      node[key] = fileNode.id;
+      /* eslint no-param-reassign: off */
+      node[linkKey] = fileNode.id;
+    }
+  } catch (err) {
+    reporter.error(`[abucms] Error on ${item.src}. Skipping!`, err);
+  }
 
   return null;
 };
