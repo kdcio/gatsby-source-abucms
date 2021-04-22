@@ -29,3 +29,7 @@ module.exports = {
   ],
 };
 ```
+
+## Example
+
+[Gatsby's blog starter with AbuCMS](https://github.com/kdcio/gatsby-starter-blog-abucms)
