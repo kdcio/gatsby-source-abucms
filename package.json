@@ -52,7 +52,7 @@
     "pretty-quick": "^3.1.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
+    "@babel/runtime": "^7.13.17",
     "gatsby-source-filesystem": "^3.3.0",
     "got": "^11.8.2",
     "node-fetch": "^2.6.1"
