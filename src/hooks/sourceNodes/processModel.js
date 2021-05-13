@@ -1,5 +1,5 @@
 import buildNode from "../../buildNode";
-import abuFetch from "../../utils/fetch";
+import abuFetch from "../../utils/abuFetch";
 
 const processModel = async ({ pluginOptions, model, args }) => {
   const { actions, cache, reporter } = args;
