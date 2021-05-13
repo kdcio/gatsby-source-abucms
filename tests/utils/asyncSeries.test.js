@@ -1,9 +1,5 @@
 import { addTask, executeTasks } from "../../src/utils/asyncSeries";
 
-const sleep = (name, ms) => {
-  return new Promise((resolve) => setTimeout(resolve(name), ms));
-};
-
 describe("Async Series", () => {
   it("should run async series", async () => {
     const storage = [];
