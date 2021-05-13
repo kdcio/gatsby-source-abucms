@@ -7,7 +7,6 @@ export const onCreateNode = async (ctx) => {
   // Process only abuCms types
   if (!node.internal.type.match(/^abuCms.*/g)) return;
 
-  // reporter.info("Match found", node);
   const { parent, children, internal, ...item } = node;
   Object.keys(item).forEach((key) => {
     const fieldVal = item[key];
@@ -17,7 +16,6 @@ export const onCreateNode = async (ctx) => {
     if (fieldVal?.type === "text/html") {
       newNode = buildNode("html", { ...ctx, node, item: fieldVal, key });
     } else if (fieldVal?.type?.match(/^image\/.*/g)) {
-      // console.log(fieldVal, key);
       buildNode("image", { ...ctx, node, item: fieldVal, key });
     }
     if (newNode) createNode(newNode);
