@@ -22,7 +22,7 @@ module.exports = {
       resolve: `gatsby-source-abucms`,
       options: {
         baseUrl: "https://xxxxxxxx.execute-api.us-east-1.amazonaws.com",
-        apiBase: "prod", // deployemnt stage
+        apiBase: "prod", // deployment stage
         models: ["blog", "home_page", "about_page", "social_profile"], // modelId
         apiKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         useCache: false, // default is true. set to false if you want to debug.
