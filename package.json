@@ -1,6 +1,6 @@
 {
   "name": "@kdcio/gatsby-source-abucms",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "GatsbyJS source plugin for AbuCMS",
   "main": "index.js",
   "files": [
