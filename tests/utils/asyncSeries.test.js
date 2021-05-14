@@ -5,7 +5,6 @@ describe("Async Series", () => {
     const storage = [];
     const store = (num) =>
       new Promise((resolve) => {
-        // console.log(`storing ${num}`);
         storage.push(num);
         resolve();
       });
