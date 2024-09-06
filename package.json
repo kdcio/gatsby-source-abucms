@@ -54,8 +54,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.13.17",
-    "gatsby-source-filesystem": "^3.4.0",
-    "got": "^11.8.2",
+    "gatsby-source-filesystem": "^5.9.0",
+    "got": "^12.6.0",
     "node-fetch": "^2.6.1"
   },
   "jest": {
